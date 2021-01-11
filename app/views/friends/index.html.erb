@@ -1,0 +1,48 @@
+<% if user_signed_in? %>
+
+
+  <h1>Lista klientów</h1>
+  <br/>
+  <table class="table table-striped table-hover table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Imię i nazwisko</th>
+        <!-- <th>Nazwisko</th> -->
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Twitter</th>
+ <!--        <th>ID użytkownika</th> -->
+        <th> </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @friends.each do |friend| %>
+        <% if friend.user == current_user %>
+          <tr>
+            <td><%= link_to friend.first_name + ' ' + friend.last_name, friend %></td>
+            <!-- <td><%= friend.last_name %></td> -->
+            <td><%= friend.email %></td>
+            <td><%= friend.phone %></td>
+            <td><%= friend.twitter %></td>
+            <!-- <td><%= friend.user_id %></td> -->
+            <!-- <td><%= link_to 'Pokaż', friend %></td> -->
+            <!-- <td><%= link_to 'Edytuj', edit_friend_path(friend) %></td> -->
+            <td><%= link_to 'Usuń', friend, method: :delete, data: { confirm: 'Potwierdź usunięcie!' }, class: "btn btn-danger btn-sm" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Nowy Klient', new_friend_path, class:"btn btn-secondary" %>
+
+<% else %>
+
+  <h1>Lista klientów</h1>
+  <br/>
+
+
+<% end %>
